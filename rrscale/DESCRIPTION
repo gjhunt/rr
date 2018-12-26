@@ -1,0 +1,16 @@
+Package: rrscale
+Title: Robust Re-scaling to make High-dimensional Data Comparable
+Version: 0.0.0.9000
+Authors@R: person("Gregory", "Hunt", email = "ghunt@wm.edu", role = c("aut", "cre"))
+Description: Non-linear and linear scale transformations to make data comparable. 
+Depends: R (>= 3.4.0)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
+Imports:
+	foreach,
+	parallel,
+	doParallel,
+	DEoptim
+
