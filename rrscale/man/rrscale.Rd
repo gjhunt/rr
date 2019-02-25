@@ -2,46 +2,64 @@
 % Please edit documentation in R/rrscale.R
 \name{rrscale}
 \alias{rrscale}
-\title{a}
+\title{Re-scale a data matrix}
 \usage{
-rrscale(Y, trans_list, lims_list, opt_control = NULL, ncores = NULL,
-  run_parallel = TRUE, verbose = TRUE, zeros = FALSE, seed = NULL)
+rrscale(Y, trans_list = list(box_cox_negative = box_cox_negative, asinh =
+  asinh), lims_list = list(box_cox_negative = c(-100, 100), asinh =
+  list(0, 100)), opt_control = NULL, ncores = NULL, z = 4,
+  q = 0.001, run_parallel = TRUE, verbose = TRUE, zeros = FALSE,
+  seed = NULL)
 }
 \arguments{
 \item{Y}{Data matrix to be transformed.}
 
-\item{trans_list}{List of transformations to be considered. See function list_transformations.}
+\item{trans_list}{List of transformations to be considered. See function list_transformations. Each element of the list should be a list containing the transformation function as the first element and the derivative of the transformation function as the second argument. The first argument of each function should be the data, the second the transformation parameter.}
 
-\item{lims_list}{List of optimization limits for each transformation from trans_list.}
+\item{lims_list}{List of optimization limits for each transformation from trans_list. This should be a list with one element per transforamtion parmeter. The element of the list for each transforamtion family should be a list of two-element vectors control the limits for each parameter of the transformation family.}
 
-\item{opt_control}{Optional optimization controlling parameters for DEoptim control argument.}
+\item{opt_control}{Optional optimization controlling parameters for DEoptim control argument. See the DEoptim package for details.}
 
 \item{ncores}{Number of cores to use if running parallel.}
 
-\item{run_parallel}{TRUE/FALSE run column-wise in parallel.}
+\item{z}{The O-step cutoff value. Points are removed if their robust z-score is above z in magnitude.}
 
-\item{verbose}{TRUE/FALSE save optimization output in local directory '.rrscale'}
+\item{q}{The Z-step winsorizing quantile cutoff. The quantile at which to winsorize the data when calculating the robust z-scores.}
 
-\item{zeros}{How to deal with zeros in the data set. If set to FALSE the algorithm will fail if it encounters a zero. If set to 'adjust' then the zeros are replaced by 1E-10. If set to 'remove' then the zeros are set to NA.}
+\item{run_parallel}{a boolean, if TRUE the method will be run run column-wise in parallel.}
+
+\item{verbose}{a boolean, if TRUE then save optimization output in local directory '.rrscale'}
+
+\item{zeros}{How to deal with zeros in the data set. If set to FALSE the algorithm will fail if it encounters a zero. If set to a number or 'NA' then the zeros are replaced by this number or 'NA'.}
 
 \item{seed}{Sets the seed before running any other analyses.}
 }
 \value{
 A list of output:
-opts: the optimization output for all transformation families and all columns
-pars: the optimal parameters for each column for the optimal family
-par_hat: the estimated optimal paramter
-NT: the original data
-RR: the robust-rescaled data
-G: gaussianized data
-Z: robust z-transformed data
-O: data with outliers removed
-transform: a function that takes the data and performs the RR transformation given the estimated values of the transformation parameter, mean, and sd of the data.
-T: the optimal family
-T_deriv: the derivative of the optimal family
-T_name: name of the optimal family
-alg_control: the parameters passed to the algorithm
+\itemize{
+\item{opts:} the optimization output for all transformation families and all columns
+\item{pars:} the optimal parameters for each column for the optimal family
+\item{par_hat:} the estimated optimal paramter
+\item{NT:} the original data
+\item{RR:} the robust-rescaled data
+\item{G:} gaussianized data
+\item{Z:} robust z-transformed data
+\item{O:} data with outliers removed
+\item{rr_fn:} a function to apply the estimated RR transformation to new data. Takes arguments
+\itemize{
+\item {Y:} the data,
+\item {z:} the z-score cutoff (defaults to 4),
+\item {q:} the winsorizing quantile cutoff (defaults to 0.001),
+\item {lambda:} the transformation parameter to use (defaults to the estimated one),
+\item {T:} the transformation function family (defaults to the optimal estimated family),
+\item {mu:} the mean to be used in the robust z-score step (re-estimates if NULL)
+\item {sigma:} the s.d. to be used in the robust z-score step (re-estimates if NULL)
+}
+\item{T:} the optimal family
+\item{T_deriv:} the derivative of the optimal family
+\item{T_name:} name of the optimal family
+\item{alg_control:} the parameters passed to the algorithm
+}
 }
 \description{
-a
+This transformation is three steps (1) Gaussianize the data, (2) z-score Transform the data, and (3) remove extreme outliers from the data. The sequence of these transformations helps focus further analyses on consequential variance in the data rather than having it be focused on variation resulting from the feature's measurement scale or outliers.
 }

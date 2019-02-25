@@ -3,12 +3,15 @@
 \docType{data}
 \name{asinh}
 \alias{asinh}
-\title{a}
+\title{Arc-hyperbolic-sine transformation}
 \format{An object of class \code{list} of length 2.}
 \usage{
 asinh
 }
 \description{
-a
+\itemize{
+\item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+\item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+}
 }
 \keyword{datasets}

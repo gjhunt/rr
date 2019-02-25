@@ -2,10 +2,10 @@
 % Please edit documentation in R/transformations.R
 \name{list_transformations}
 \alias{list_transformations}
-\title{List possible transformations.}
+\title{List possible transformations}
 \usage{
 list_transformations()
 }
 \description{
-List possible transformations.
+Returns list of transformations. Each transformation is a transformation function (``T'') accepting a parameter and the derivative of this transformation function (``T_deriv'').
 }

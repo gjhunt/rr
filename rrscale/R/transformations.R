@@ -1,4 +1,9 @@
-#' a
+#' Traditional box-cox power transformation. Accepts one real parameter
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 box_cox <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -26,7 +31,12 @@ box_cox <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Simple power transformation
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 power <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -40,7 +50,12 @@ power <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Box-cox transformation of shifted variable
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation. The parameter lambda has two real elements (1) the power and (2) the additive shift to the data.  
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 box_cox_shift <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -68,7 +83,12 @@ box_cox_shift <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Arc-hyperbolic-sine transformation
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 asinh <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -96,7 +116,12 @@ asinh <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Log of the traditional box-cox transformation
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 log_box_cox <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -124,7 +149,12 @@ log_box_cox <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Box-cox transformation with a shift of 1 added to the data
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 box_cox_plus1 <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -152,7 +182,12 @@ box_cox_plus1 <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' A generalized box-cox transformation that can handle negative data
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 box_cox_negative <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -172,7 +207,12 @@ box_cox_negative <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Box-cox transformation with the data shifted so that it is positive
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 box_cox_plusmin <- list(T = function(Y, lambda, inverse = FALSE) {
     eps <- 1e-05
@@ -218,7 +258,12 @@ box_cox_plusmin <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' a
+#' Exponential of the tranditional box-cox transformation
+#'
+#' \itemize{
+#' \item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+#' \item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+#' }
 #' @export
 box_cox_exp <- list(T = function(Y, lambda, inverse = FALSE) {
     if (!inverse) {
@@ -246,7 +291,9 @@ box_cox_exp <- list(T = function(Y, lambda, inverse = FALSE) {
     return(Y)
 })
 
-#' List possible transformations. 
+#' List possible transformations
+#' 
+#' Returns list of transformations. Each transformation is a transformation function (``T'') accepting a parameter and the derivative of this transformation function (``T_deriv'').
 #' @export
 list_transformations <- function() {
     return(list(box_cox = box_cox, power = power, box_cox_shift = box_cox_shift, 

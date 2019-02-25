@@ -1,5 +1,14 @@
+#' Centers the data column-wise
+#'
+#' @param x the data. 
+#' @export
 center <- function(x) scale(x, scale = FALSE)
 
+#' Winsorizes the data
+#' 
+#' @param x the data.
+#' @param fraction the top and bottom quantiles to cap. 
+#' @export
 winsor <- function(x, fraction = 0.01) {
     if (length(fraction) != 1 || fraction < 0 || fraction > 0.5) {
         stop("bad value for 'fraction'")
@@ -10,11 +19,9 @@ winsor <- function(x, fraction = 0.01) {
     x
 }
 
-trim <- function(x, alpha) {
-    q <- stats::quantile(x, c(alpha, 1 - alpha))
-    return(x[x > q[1] & x < q[2]])
-}
-
+#' Calculate the geometric mean
+#'
+#' @param x the data. 
 gm_mean <- function(x) {
     exp(mean(log(x[x > 0])))
 }

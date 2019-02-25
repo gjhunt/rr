@@ -3,12 +3,15 @@
 \docType{data}
 \name{log_box_cox}
 \alias{log_box_cox}
-\title{a}
+\title{Log of the traditional box-cox transformation}
 \format{An object of class \code{list} of length 2.}
 \usage{
 log_box_cox
 }
 \description{
-a
+\itemize{
+\item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+\item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+}
 }
 \keyword{datasets}

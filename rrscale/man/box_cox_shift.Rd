@@ -3,12 +3,15 @@
 \docType{data}
 \name{box_cox_shift}
 \alias{box_cox_shift}
-\title{a}
+\title{Box-cox transformation of shifted variable}
 \format{An object of class \code{list} of length 2.}
 \usage{
 box_cox_shift
 }
 \description{
-a
+\itemize{
+\item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation. The parameter lambda has two real elements (1) the power and (2) the additive shift to the data.  
+\item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+}
 }
 \keyword{datasets}

@@ -3,12 +3,15 @@
 \docType{data}
 \name{box_cox_exp}
 \alias{box_cox_exp}
-\title{a}
+\title{Exponential of the tranditional box-cox transformation}
 \format{An object of class \code{list} of length 2.}
 \usage{
 box_cox_exp
 }
 \description{
-a
+\itemize{
+\item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+\item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+}
 }
 \keyword{datasets}

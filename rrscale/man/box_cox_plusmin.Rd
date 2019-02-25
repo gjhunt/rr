@@ -3,12 +3,15 @@
 \docType{data}
 \name{box_cox_plusmin}
 \alias{box_cox_plusmin}
-\title{a}
+\title{Box-cox transformation with the data shifted so that it is positive}
 \format{An object of class \code{list} of length 2.}
 \usage{
 box_cox_plusmin
 }
 \description{
-a
+\itemize{
+\item{T} the transformation with arguments Y, the data, lambda the parameter, and boolean inverse to calculate inverse transformation.
+\item{T_deriv} the transformation with arguments Y, the data, lambda the parameter.
+}
 }
 \keyword{datasets}

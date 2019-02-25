@@ -1,8 +1,9 @@
 Package: rrscale
-Title: Robust Re-scaling to make High-dimensional Data Comparable
-Version: 0.0.0.9000
+Title: Robust Re-Scaling to Better Recover Latent Effects in Data
+Version: 0.1.0
 Authors@R: person("Gregory", "Hunt", email = "ghunt@wm.edu", role = c("aut", "cre"))
-Description: Non-linear and linear scale transformations to make data comparable. 
+Description: Non-linear transformations of data to better discover latent effects. 
+Date: 2019-2-22
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8
@@ -12,5 +13,12 @@ Imports:
 	foreach,
 	parallel,
 	doParallel,
-	DEoptim
-
+	DEoptim,
+	abind
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat,
+    ggplot2,
+    reshape2
+VignetteBuilder: knitr
