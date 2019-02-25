@@ -1,2 +1,3 @@
-# rr
-Robust re-scaling transformation. 
+## Robust Re-scaling
+
+Working page for the rr transformation. 
