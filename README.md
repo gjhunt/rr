@@ -1,3 +1,6 @@
-## Robust Re-scaling
+## (R)obust (R)e-scaling
 
-Working page for the rr transformation. 
+The Robust re-scaling transformation (RR) is a transformation the help reveal latent structure in data. It uses three steps to transform the data: (1) Gaussianize the data, (2) z-score Transform the data, and (3) remove extreme outliers from the data. The sequence of these transformations helps focus analyses on consequential variance in the data rather than  having it be focused on variation resulting from the feature's  measurement scale or outliers.
+
+This is the github page for our R package 'rrscale' to perform the transformation. 
+
