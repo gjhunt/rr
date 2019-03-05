@@ -1,9 +1,9 @@
 Package: rrscale
 Title: Robust Re-Scaling to Better Recover Latent Effects in Data
-Version: 0.1.0
+Version: 0.1.2
 Authors@R: person("Gregory", "Hunt", email = "ghunt@wm.edu", role = c("aut", "cre"))
-Description: Non-linear transformations of data to better discover latent effects. 
-Date: 2019-2-22
+Description: Non-linear transformations of data to better discover latent effects. Applies a sequence of three transformations (1) a Gaussianizing transformation, (2) a Z-score transformation, and (3) an outlier removal transformation. 
+Date: 2019-2-25
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8

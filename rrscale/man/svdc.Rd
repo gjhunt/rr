@@ -16,3 +16,8 @@ svdc(X, nu = NULL, nv = NULL)
 \description{
 This calculates right and left singular vectors of a data matrix possibly containing missing values.
 }
+\examples{
+Y <- rnorm(10)\%*\%t(rnorm(10))
+Y[1,1] <- NA
+svdc.out <- svdc(Y)
+}

@@ -8,7 +8,7 @@ rrscale(Y, trans_list = list(box_cox_negative = box_cox_negative, asinh =
   asinh), lims_list = list(box_cox_negative = c(-100, 100), asinh =
   list(0, 100)), opt_control = NULL, ncores = NULL, z = 4,
   q = 0.001, run_parallel = TRUE, verbose = TRUE, zeros = FALSE,
-  seed = NULL)
+  opts = FALSE, seed = NULL)
 }
 \arguments{
 \item{Y}{Data matrix to be transformed.}
@@ -30,6 +30,8 @@ rrscale(Y, trans_list = list(box_cox_negative = box_cox_negative, asinh =
 \item{verbose}{a boolean, if TRUE then save optimization output in local directory '.rrscale'}
 
 \item{zeros}{How to deal with zeros in the data set. If set to FALSE the algorithm will fail if it encounters a zero. If set to a number or 'NA' then the zeros are replaced by this number or 'NA'.}
+
+\item{opts}{Boolean determining if optimization output is returned. Defaults to FALSE.}
 
 \item{seed}{Sets the seed before running any other analyses.}
 }
@@ -62,4 +64,9 @@ A list of output:
 }
 \description{
 This transformation is three steps (1) Gaussianize the data, (2) z-score Transform the data, and (3) remove extreme outliers from the data. The sequence of these transformations helps focus further analyses on consequential variance in the data rather than having it be focused on variation resulting from the feature's measurement scale or outliers.
+}
+\examples{
+Y <- rlnorm(10)\%*\%t(rlnorm(10))
+rr.out <- rrscale(Y,run_parallel=FALSE)
+Yt <- rr.out$RR
 }

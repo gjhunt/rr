@@ -15,14 +15,14 @@ In this vignette we'll look at how to use rrscale to re-scale data and help disc
 First we are going to generate data that is the concatenation of two log-normal groups. We do this by taking the outer product between two i.i.d. log-normal vectors, creating group 1 as:
 ```{r}
 set.seed(919)
-u1 = rlnorm(100)
-v1 = rlnorm(100)
+u1 = rlnorm(10)
+v1 = rlnorm(10)
 Y1 = u1%*%t(v1)
 ```
 and similarly group 2 as 
 ```{r}
-u2 = rlnorm(100)
-v2 = rlnorm(100)
+u2 = rlnorm(10)
+v2 = rlnorm(10)
 Y2 = .5+u2%*%t(v2)
 ```
 and then we concatenate these together to make a full data matrix (adding some noise)
@@ -35,7 +35,7 @@ Notice that its difficult to tell the groups apart:
 ```{r, out.width='100%', fig.asp=.5, dpi=300}
 library('reshape2')
 library('ggplot2')
-group = factor(rep(c(1,2),each=100))
+group = factor(rep(c(1,2),each=nrow(Y)/2))
 levels(group) = c("group1","group2")
 mY = melt(data.frame(Y,group),id.vars="group")
 ggplot(data=mY,mapping=aes(x=value,color=group))+geom_histogram(bins=100)+geom_vline(data=aggregate(value~group,data=mY,mean),mapping=aes(xintercept=value,linetype=group),size=1.5)

@@ -14,3 +14,7 @@ winsor(x, fraction = 0.01)
 \description{
 Winsorizes the data
 }
+\examples{
+Y <- rlnorm(10)\%*\%t(rlnorm(10))
+Yw <- winsor(Y,1E-2)
+}

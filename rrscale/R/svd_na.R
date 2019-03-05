@@ -5,6 +5,10 @@
 #' @param X the data matrix of which to calcluate the completed SVD. 
 #' @param nu the number of left singular vectors to calculate
 #' @param nv the nubmer of right singular vectors to calculate
+#' @examples
+#' Y <- rnorm(10)%*%t(rnorm(10))
+#' Y[1,1] <- NA
+#' svdc.out <- svdc(Y)
 #' @export
 svdc <- function(X, nu = NULL, nv = NULL) {
     X <- as.matrix(X)

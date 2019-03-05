@@ -12,3 +12,7 @@ gm_mean(x)
 \description{
 Calculate the geometric mean
 }
+\examples{
+Y <- rlnorm(10)
+gm <- gm_mean(Y)
+}

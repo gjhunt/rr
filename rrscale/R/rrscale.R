@@ -12,6 +12,7 @@
 #' @param run_parallel a boolean, if TRUE the method will be run run column-wise in parallel. 
 #' @param verbose a boolean, if TRUE then save optimization output in local directory '.rrscale'
 #' @param zeros How to deal with zeros in the data set. If set to FALSE the algorithm will fail if it encounters a zero. If set to a number or 'NA' then the zeros are replaced by this number or 'NA'.
+#' @param opts Boolean determining if optimization output is returned. Defaults to FALSE. 
 #' @param seed Sets the seed before running any other analyses. 
 #' @return A list of output:
 #' \itemize{
@@ -38,6 +39,10 @@
 #' \item{T_name:} name of the optimal family
 #' \item{alg_control:} the parameters passed to the algorithm
 #' }
+#' @examples
+#' Y <- rlnorm(10)%*%t(rlnorm(10))
+#' rr.out <- rrscale(Y,run_parallel=FALSE)
+#' Yt <- rr.out$RR
 #' @importFrom foreach %do% %dopar% foreach
 #' @importFrom doParallel registerDoParallel
 #' @importFrom parallel detectCores makeCluster stopCluster
@@ -47,7 +52,7 @@ rrscale <- function(Y, trans_list=list(box_cox_negative=box_cox_negative,
                     lims_list=list(box_cox_negative = c(-100,100),
                                    asinh=list(0,100)),
                   opt_control = NULL, ncores = NULL, z=4, q=0.001,
-                  run_parallel = TRUE, verbose = TRUE, zeros = FALSE, seed = NULL) {
+                  run_parallel = TRUE, verbose = TRUE, zeros = FALSE, opts=FALSE, seed = NULL) {
     
     set.seed(seed)
 
@@ -82,43 +87,49 @@ rrscale <- function(Y, trans_list=list(box_cox_negative=box_cox_negative,
     T_deriv <- trans$T_deriv
 
     # Form a function for RR that takes a matrix and returns any application of G, Z or O
-    G_fn = function(Y,lambda=lambda_hat, T=T){
-        return(T(Y,lambda))
-    }
-
-    Z_fn = function(Y,mu=NULL,sigma=NULL,q=0.001){
-        Y_tmp <- as.matrix(Y)
-        Yw <- winsor(Y_tmp, q)
-        if(is.null(mu))
-            mu <- mean(Yw, na.rm = TRUE)
-        Ywc <- Yw - mu
-        if(is.null(sigma))
-            sigma <- sqrt(mean(Ywc^2, na.rm = TRUE))
-        Z <- (Y_tmp - mu)/sigma
-        return(Z)
-    }
-
-    O_fn = function(Y,z=4,mu=NULL,sigma=NULL,q=0.001){
-        Z = Z_fn(Y,mu=mu,sigma=sigma,q=q)
-        O = Y
-        O[abs(Z)>z] <- NA
-        return(O)
-    }
-
     RR_fn = function(Y,G=TRUE,Z=TRUE,O=TRUE,
                      lambda=lambda_hat,T=T_opt,mu=NULL,sigma=NULL,q=0.001,z=4){
+
+        G_fn = function(Y,lambda=lambda_hat, T=T){
+            return(T(Y,lambda))
+        }
+
+        Z_fn = function(Y,mu=NULL,sigma=NULL,q=0.001){
+            Y_tmp <- as.matrix(Y)
+            Yw <- winsor(Y_tmp, q)
+            if(is.null(mu))
+                mu <- mean(Yw, na.rm = TRUE)
+            Ywc <- Yw - mu
+            if(is.null(sigma))
+                sigma <- sqrt(mean(Ywc^2, na.rm = TRUE))
+            Z <- (Y_tmp - mu)/sigma
+            return(Z)
+        }
+
+        O_fn = function(Y,z=4,mu=NULL,sigma=NULL,q=0.001){
+            Z = Z_fn(Y,mu=mu,sigma=sigma,q=q)
+            O = Y
+            O[abs(Z)>z] <- NA
+            return(O)
+        }
+
         if(G)
             Y <- G_fn(Y,lambda=lambda,T=T)
         if(Z)
             Y <- Z_fn(Y,mu=mu,sigma=sigma,q=q)
         if(O)
             Y <- O_fn(Y,z=z,mu=mu,sigma=sigma,q=q)
-        return(Y)
+        return(as.matrix(Y))
     }
 
-    RRsub = subClosure(RR_fn,c("G_fn","Z_fn","O_fn","lambda_hat","T","T_opt","q","z"))
+    RRsub = subClosure(RR_fn,c("lambda_hat","T","T_opt","q","z"))
 
-    ret_list = list(opts = sdns, # optimization output
+    opt_return = NULL
+    if(opts){
+        opt_return = sdns
+    }
+
+    ret_list = list(opts = opt_return, # optimization output
                     pars = lambdas, # estimated columnwise parameters
                     par_hat = lambda_hat, # overall estimated parameter
                     NT = as.matrix(Y), # No transformation
