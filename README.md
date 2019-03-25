@@ -12,3 +12,5 @@ This is the github page for our R package 'rrscale' to perform the transformatio
 
 A basic vignette using rrscale is available [here](vign/rescaling_data.md) ([html](vign/rescaling_data.html) [rmd](vign/rescaling_data.Rmd))
 
+Our R package is available on CRAN: [https://cran.r-project.org/package=rrscale](https://cran.r-project.org/package=rrscale)
+
