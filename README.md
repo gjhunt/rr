@@ -14,3 +14,5 @@ A basic vignette using rrscale is available [here](vign/rescaling_data.md) ([htm
 
 Our R package is available on CRAN: [https://cran.r-project.org/package=rrscale](https://cran.r-project.org/package=rrscale)
 
+Our docker image for reproducing the analysis in paper can be found [here](https://hub.docker.com/r/gjhunt/rr/).
+
