@@ -1,7 +1,5 @@
 ## (R)obust (R)e-scaling
 
-<img src="asvd.jpg" width="35%" align="left">
-
 The **Robust re-scaling** transformation (RR) is a transformation the help reveal latent structure in data. It uses three steps to transform the data:
 
 1. Gaussianize the data,
@@ -22,3 +20,4 @@ Our R package is available on CRAN: [https://cran.r-project.org/package=rrscale]
 
 Our docker image for reproducing the analysis in paper can be found [here](https://hub.docker.com/r/gjhunt/rr/).
 
+<img src="asvd.jpg" width="50%" align="left">
