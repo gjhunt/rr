@@ -1,4 +1,4 @@
-<img src="asvd.jpg" width="75%">
+<img src="asvd.jpg" width="100%">
 
 ## (R)obust (R)e-scaling
 
