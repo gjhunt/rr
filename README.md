@@ -1,6 +1,6 @@
 <img src="asvd.jpg" width="100%">
 
-## (R)obust (R)e-scaling
+# rr: (R)obust (R)e-scaling to help reveal latent structure. 
 
 The **Robust re-scaling** transformation (RR) is a transformation the help reveal latent structure in data. It uses three steps to transform the data:
 
@@ -10,10 +10,20 @@ The **Robust re-scaling** transformation (RR) is a transformation the help revea
 
 The sequence of these transformations helps focus analyses on consequential variance in the data rather than  having it be focused on variation resulting from the feature's  measurement scale or outliers.
 
-This is the github page for our R package 'rrscale' to perform the transformation.
+## Software
 
-A basic vignette using rrscale is available [here](vign/rescaling_data.md) ([html](vign/rescaling_data.html) [rmd](vign/rescaling_data.Rmd))
+* Our **R package** **rrscale** is available on CRAN: [https://cran.r-project.org/package=rrscale](https://cran.r-project.org/package=rrscale) on as part of this github repo.
 
-Our R package is available on CRAN: [https://cran.r-project.org/package=rrscale](https://cran.r-project.org/package=rrscale)
+### Vignettes
 
-Our docker image for reproducing the analysis in paper can be found [here](https://hub.docker.com/r/gjhunt/rr/).
+* A simple introduction to rrscale is available [here](vign/rescaling_data.md) ([html](vign/rescaling_data.html) [rmd](vign/rescaling_data.Rmd))
+
+## Papers
+
+### 1. "Automatic Transformation and Integration to Improve Visualization and Discovery of Latent Effects in Imaging Data" JCGS (2020)
+
+* Our **publication** in JCGS is accessible [here](https://amstat.tandfonline.com/doi/abs/10.1080/10618600.2020.1741379)
+
+* Our **docker image** for reproducing the analysis in paper can be found [here](https://hub.docker.com/r/gjhunt/rr/).
+
+* The scripts for the analysis in our bioinformatics paper can be found [here](https://github.com/gjhunt/rr/tree/master/jcgs_2020_reproduce)
