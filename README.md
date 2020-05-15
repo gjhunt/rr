@@ -26,4 +26,6 @@ The sequence of these transformations helps focus analyses on consequential vari
 
 * Our **docker image** for reproducing the analysis in paper can be found [here](https://hub.docker.com/r/gjhunt/rr/).
 
-* The scripts for the analysis in our bioinformatics paper can be found [here](https://github.com/gjhunt/rr/tree/master/jcgs_2020_reproduce)
+* The scripts for the analysis in our paper can be found [here](https://github.com/gjhunt/rr/tree/master/jcgs_2020_reproduce)
+
+* The data for for paper can be found as part of our docker image, on github [here](https://github.com/gjhunt/rr/tree/master/jcgs_2020_reproduce/MCF10A/mcf10a_data), or at the MEP-LINCS synapse page [here](https://www.synapse.org/#!Synapse:syn2862345/wiki/72486)
